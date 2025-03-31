@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --accent-color: #e74c3c;
-    --light-color: #ecf0f1;
+    --primary-color: #5dade2; /* светло-голубой */
+    --secondary-color: #ffffff; /* белый */
+    --accent-color: #e74c3c; /* ярко-красный */
+    --light-color: #f2f6f7; /* очень светлый серовато-голубой */
     --dark-color: #2c3e50;
     --text-color: #333;
     --text-light: #7f8c8d;
@@ -18,18 +18,20 @@ body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.7;
     color: var(--text-color);
-    background-color: #f9f9f9;
+    background-color: var(--light-color);
     overflow-x: hidden;
 }
 
+/* Заголовки */
 h1, h2, h3, h4 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
+/* Шапка */
 .hero {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--dark-color);
     padding: 5rem 1rem;
     text-align: center;
     position: relative;
@@ -38,6 +40,7 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 5px solid var(--accent-color);
 }
 
 .hero::before {
@@ -48,7 +51,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     background: url('images/dna-pattern.png') center/cover;
-    opacity: 0.1;
+    opacity: 0.05;
 }
 
 .hero::after {
@@ -58,14 +61,14 @@ h1, h2, h3, h4 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
     animation: float 15s infinite alternate ease-in-out;
 }
 
 @keyframes float {
     0% { transform: translate(0, 0); }
-    50% { transform: translate(10%, 5%); }
-    100% { transform: translate(-10%, -5%); }
+    50% { transform: translate(5%, 3%); }
+    100% { transform: translate(-5%, -3%); }
 }
 
 .hero-content {
@@ -78,8 +81,8 @@ h1, h2, h3, h4 {
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    background-image: linear-gradient(90deg, #fff, #ecf0f1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-image: linear-gradient(90deg, var(--dark-color), var(--text-light));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -90,7 +93,7 @@ h1, h2, h3, h4 {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     font-weight: 300;
-    color: var(--light-color);
+    color: var(--dark-color);
 }
 
 .cta-button {
@@ -103,8 +106,6 @@ h1, h2, h3, h4 {
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: hidden;
 }
 
 .cta-button:hover {
@@ -118,12 +119,14 @@ h1, h2, h3, h4 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Основной контент */
 main {
     padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Заголовки разделов */
 .section-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -153,6 +156,7 @@ main {
     border-radius: 2px;
 }
 
+/* Иконки */
 .icon {
     font-size: 2.5rem;
     color: var(--primary-color);
@@ -161,7 +165,8 @@ main {
     transition: transform 0.3s ease;
 }
 
-.card-container {
+/* Карточки */
+.card-container, .facts-container, .recommendation-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -169,66 +174,42 @@ main {
     margin-top: 2rem;
 }
 
-.card {
+.card, .fact-card, .recommendation-card {
     background: white;
     border-radius: 10px;
     padding: 2rem;
     width: 300px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.6s ease-out;
     text-align: center;
     opacity: 0;
     transform: translateY(20px) scale(0.95);
-    perspective: 1000px;
-    transform-style: preserve-3d;
 }
 
-.card.visible {
+.card.visible, .fact-card.visible, .recommendation-card.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
 
-.card:hover {
+.card:hover, .fact-card:hover, .recommendation-card:hover {
     transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-.card-icon {
+/* Иконки в карточках */
+.card-icon, .recommendation-icon, .fact-badge {
     font-size: 2.5rem;
-    color: var(--primary-color);
     margin-bottom: 1rem;
     transition: transform 0.3s ease;
 }
 
-.card:hover .card-icon {
+.card:hover .card-icon, .recommendation-card:hover .recommendation-icon, .fact-card:hover .fact-badge {
     transform: scale(1.1) rotate(5deg);
 }
 
-.recommendation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
+/* Рекомендательные карточки */
 .recommendation-card {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: all 0.6s ease-out;
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-}
-
-.recommendation-card.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.recommendation-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: 300px;
 }
 
 .recommendation-icon {
@@ -241,50 +222,17 @@ main {
     margin: 0 auto 1rem;
     font-size: 1.5rem;
     color: white;
-    transition: transform 0.3s ease;
-}
-
-.recommendation-card:hover .recommendation-icon {
-    transform: scale(1.1) rotate(5deg);
 }
 
 .nutrition-icon {
-    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    background: linear-gradient(135deg, #a3e4d7, #48c9b0);
 }
 
 .activity-icon {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    background: linear-gradient(135deg, #85c1e9, #3498db);
 }
 
-.facts-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.fact-card {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    position: relative;
-    padding-top: 4rem;
-    transition: all 0.6s ease-out;
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-}
-
-.fact-card.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.fact-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 0 5px rgba(231, 76, 60, 0.1);
-}
-
+/* Факты */
 .fact-badge {
     position: absolute;
     top: -20px;
@@ -293,22 +241,18 @@ main {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.fact-card:hover .fact-badge {
-    transform: translateX(-50%) scale(1.1);
-}
-
+/* Футер */
 footer {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     padding: 3rem 1rem 1rem;
     margin-top: 3rem;
@@ -330,20 +274,9 @@ footer {
 
 .footer-section p {
     margin-bottom: 0.5rem;
-    color: var(--light-color);
+    color: var(--text-light);
 }
 
-.qr-code {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    display: block;
-    background: white;
-    padding: 0.5rem;
-    border-radius: 5px;
-    transition: transform 0.5s ease;
-    animation: pulse 2s infinite alternate;
-}
 
 @keyframes pulse {
     from {
@@ -360,18 +293,19 @@ footer {
     text-align: center;
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: var(--light-color);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-light);
     font-size: 0.9rem;
 }
 
+/* Эффект переворота страницы */
 .page-turn-effect {
     position: fixed;
     top: 0;
     right: 0;
     width: 50px;
     height: 100vh;
-    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05));
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.03));
     pointer-events: none;
     z-index: 100;
     transform-origin: right center;
